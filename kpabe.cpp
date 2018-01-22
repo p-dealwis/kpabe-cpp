@@ -7,11 +7,15 @@
 #include <array>
 #include <vector>
 
+
 #include <mbedtls/cipher.h>
 #include <mbedtls/md.h>
 #include <pbc.h>
 
 #include "kpabe.hpp"
+
+//Debugging
+#include <iostream>
 
 using namespace std;
 
@@ -81,21 +85,26 @@ Node::Node(Node&& other):
 
 Node::Node(int attr) {
    this->attr = attr;
+   cout << attr << endl;
 }
 
 Node::Node(Type type, const vector<Node>& children) {
    this->children = children;
    this->type = type;
+   if (type == Type::AND)  cout << "AND" << endl;
+   else  cout << "OR" << endl;
+   
 }
 
-Node& Node::operator=(Node other) {
-   //TODO: check if not self
-   swap(attr, other.attr);
-   swap(type, other.type);
-   swap(children, other.children);
-   return *this;
+
+//Fixed Copy Assignment
+Node& Node::operator=(const Node& other) {
+   attr = other.attr;
+   type = other.type;
+   children = other.children;
 }
 
+//Move Assignment
 Node& Node::operator=(Node&& other) {
    //assert(this != &other);
    attr = move(other.attr);

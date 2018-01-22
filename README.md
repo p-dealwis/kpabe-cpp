@@ -89,6 +89,8 @@ for(auto& attrCiPair: Cw) {
 }
 ```
 
+To compile the above use the following command: `g++ -std=gnu++14 -o main main.cpp kpabe.cpp -I. -I/usr/local/include -I/usr/local/include/pbc  -lpbc -lgmp -lmbedcrypto -lm`
+
 I would like to change at least a few things in the API, should I find the time.
 Suggestions are always welcome.
 

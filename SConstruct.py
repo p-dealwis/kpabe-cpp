@@ -33,7 +33,7 @@ def registerTests(env):
 
    files = ["kpabe_test.cpp"]
    testEnv = env.Clone()
-   testEnv["LIBS"].extend(["kpabe", BOOST_TEST_LIB])
+   testEnv["LIBS"].insert(0,["kpabe", BOOST_TEST_LIB])
    testCases = [];
    for f in files:
       targetFile = os.path.join("#",
@@ -44,7 +44,7 @@ def registerTests(env):
 
 def registerMain(env):
   mainEnv = env.Clone()
-  mainEnv["LIBS"].append("kpabe")
+  mainEnv["LIBS"].insert(0, "kpabe")
   return mainEnv.Program("main", "#main.cpp")
 
 def collectNativeTargets(env):
